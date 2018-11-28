@@ -36,5 +36,24 @@ router.get('/:id', async (req, res) => {
 	}
 })
 
+// DELETE route to delete user
+router.delete('/:id', async (req, res) => {
+	try {
+		const userToDelete = await User.findByIdAndRemove(req.params.id);
+
+		res.json({
+			status: 200,
+			data: userToDelete,
+			message: 'user deleted succesfully'
+		})
+	} catch (err) {
+		res.json({
+			status: 400,
+			error: err,
+			message: 'could not delete user'
+		})
+	}
+})
+
 
 module.exports = router;

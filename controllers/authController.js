@@ -86,7 +86,6 @@ router.post('/register', async (req, res) => {
 
     req.session.username = req.body.username;
     req.session.logged = true;
-    req.session.message = 'ooh'
     req.session.ID = user._id;
     console.log(user._id, 'USER ID-----------------------')
 
