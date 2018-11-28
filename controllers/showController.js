@@ -3,12 +3,13 @@ const User = require('../models/user');
 const express = require('express');
 const router = express.Router();
 const request = require('superagent');
-const searchEndPoint = 'http://www.omdbapi.com/?t='
-const addKey = '&apikey=ec5b4bc1'
-const typeShow = '&type=series'
+const searchEndPoint = 'http://www.omdbapi.com/?s=';
+const idEndPoint = 'http://www.omdbapi.com/?i='
+const addKey = '&apikey=ec5b4bc1';
+const typeShow = '&type=series';
 
 
-// get request when user searches
+// get route when user searches
 router.get('/:search', async (req, res) => {
 	try {
 		console.log('hitting');
@@ -27,5 +28,20 @@ router.get('/:search', async (req, res) => {
 	}
 })
 
+// GET route when user clicks on specific series
+router.get('/:id', async (req, res) => {
+	try {
+		const foundShow = await request.get(idEndPoint+req.params.id+typeShow+addKey);
+
+		const foundShowJSON = await JSON.parse(foundShow.text);
+		JSON.stringify(foundShowJSON);
+		res.json({
+			status: 200,
+			data: foundShowJSON
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
 
 module.exports = router;

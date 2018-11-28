@@ -8,7 +8,8 @@ const movieSchema = new mongoose.Schema({
 	year: Number,
 	favorites: Number,
 	adds: Number,
-	recommendations: Number
+	recommendations: Number,
+	imageUrl: String
 })
 
 module.exports = mongoose.model('Movie', movieSchema);
