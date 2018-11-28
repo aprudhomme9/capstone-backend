@@ -4,6 +4,7 @@
   "description": "A community app for movie and TV lovers to connect, discuss, and share recommendations",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^6.1.0",
