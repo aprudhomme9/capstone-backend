@@ -7,41 +7,88 @@ const searchEndPoint = 'http://www.omdbapi.com/?s=';
 const idEndPoint = 'http://www.omdbapi.com/?i='
 const addKey = '&apikey=ec5b4bc1';
 const typeShow = '&type=series';
+const Show = require('../models/show');
 
 
 // get route when user searches
 router.get('/:search', async (req, res) => {
 	try {
-		console.log('hitting');
+
 		const query = req.params.search;
-		console.log(query, "<---USER QUERY");
+
 		const foundShows = await request.get(searchEndPoint+query+typeShow+addKey);
-		console.log(query, "<---USER QUERY");
+		// console.log(foundShows);
 		const foundShowsJSON = await JSON.parse(foundShows.text);
-		JSON.stringify(foundShowsJSON);
+		// creates array of objects using API results
+		const mappedShows = foundShowsJSON.Search.map((show) => {
+			const newObject = {
+				title: show.Title,
+				imageUrl: show.Poster,
+				year: show.Year,
+				imdbID: show.imdbID
+			}
+			return newObject;
+		})
+		
+		const allShows = await Show.find({});
+		console.log(allShows);
+		const showTitles = [];
+		console.log(showTitles);
+		allShows.forEach((show) => {
+			showTitles.push(show.title);
+		})
+		console.log(showTitles, '<---Show Titles');
+		// Filtering the array of objects we just created to account for possible duplicates. Returns array of Shows to create in DB if the search yields Shows not already in database
+		console.log(mappedShows, '<---MAPPED SHOWS');
+		
+		const showsToCreate = mappedShows.filter((show) => {
+
+			if(!showTitles.includes(show.title)){
+				return show
+			}
+		})
+		console.log(showsToCreate, '<---SHOWS TO CREATE');
+		const createdShows = await Show.create(showsToCreate);
+				
+		JSON.stringify(createdShows);
 		res.json({
 			status: 200,
-			data: foundShowsJSON
+			data: createdShows
 		})
 	} catch (err) {
 		// res.send(err)
 	}
 })
 
-// GET route when user clicks on specific series
-router.get('/:id', async (req, res) => {
+router.get('/show/:id', async (req, res) => {
 	try {
 		const foundShow = await request.get(idEndPoint+req.params.id+typeShow+addKey);
 
 		const foundShowJSON = await JSON.parse(foundShow.text);
-		JSON.stringify(foundShowJSON);
+		// Updates selected Show with additional info from API
+		// Show selected using imdbID, as is required by omdb API
+		const updatedShow = await Show.findOneAndUpdate({title: foundShowJSON.Title}, {
+				description: foundShowJSON.Plot,
+				genre: foundShowJSON.Genre,
+				rated: foundShowJSON.Rated,
+				actors: foundShowJSON.Actors,
+				runTime: foundShowJSON.Runtime,
+				country: foundShowJSON.Country,
+				imdbRating: foundShowJSON.imdbRating
+			}, {new: true});
+
+		await updatedShow.save();
+		JSON.stringify(updatedShow);
 		res.json({
 			status: 200,
-			data: foundShowJSON
+			data: updatedShow
 		})
 	} catch (err) {
 		// res.send(err)
 	}
 })
+
+// PUT request to eddddiiitt
+
 
 module.exports = router;

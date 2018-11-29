@@ -9,7 +9,11 @@ const movieSchema = new mongoose.Schema({
 	favorites: Number,
 	adds: Number,
 	recommendations: Number,
-	imageUrl: String
+	imageUrl: String,
+	rated: String,
+	actors: String,
+	runTime: String,
+	imdbRating: Number
 })
 
 module.exports = mongoose.model('Movie', movieSchema);

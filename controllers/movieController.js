@@ -13,41 +13,39 @@ const Movie = require('../models/movie');
 // get request when user searches
 router.get('/:search', async (req, res) => {
 	try {
-		console.log('hitting');
+
 		const query = req.params.search;
-		console.log(query, "<---USER QUERY");
+
 		const foundMovies = await request.get(searchEndPoint+query+typeMovie+addKey);
-		console.log(query, "<---USER QUERY");
+
 		const foundMoviesJSON = await JSON.parse(foundMovies.text);
-		console.log(foundMoviesJSON);
+		// creates array of objects using API results
 		const mappedMovies = foundMoviesJSON.Search.map((movie) => {
 			const newObject = {
 				title: movie.Title,
-				imageUrl: movie.Poster
+				imageUrl: movie.Poster,
+				year: movie.Year,
+				imdbID: movie.imdbID
 			}
 			return newObject;
 		})
-		console.log(mappedMovies, '<----mapped movies');
+
 		const allMovies = await Movie.find({});
 		const movieTitles = [];
-		console.log(allMovies, "<---ALL MOVIES");
+
 		allMovies.forEach((movie) => {
 			movieTitles.push(movie.title);
 		})
-		console.log(movieTitles, '<---MOVIE TITLES');
-		// const moviesToCreate = [];
+		// Filtering the array of objects we just created to account for possible duplicates. Returns array of movies to create in DB if the search yields movies not already in database
 		const moviesToCreate = mappedMovies.filter((movie) => {
-			console.log(movie);
-			console.log(movieTitles.includes(movie.title));
+
 			if(!movieTitles.includes(movie.title)){
 				return movie
 			}
 		})
 			
-		console.log(moviesToCreate, '<-----MOVIES TO CREATE');
 		const createdMovies = await Movie.create(moviesToCreate);
-		
-		
+				
 		JSON.stringify(createdMovies);
 		res.json({
 			status: 200,
@@ -58,16 +56,28 @@ router.get('/:search', async (req, res) => {
 	}
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/movie/:id', async (req, res) => {
 	try {
 		const foundMovie = await request.get(idEndPoint+req.params.id+typeMovie+addKey);
 
 		const foundMovieJSON = await JSON.parse(foundMovie.text);
+		// Updates selected movie with additional info from API
+		// Movie selected using imdbID, as is required by omdb API
+		const updatedMovie = await Movie.findOneAndUpdate({title: foundMovieJSON.Title}, {
+				description: foundMovieJSON.Plot,
+				genre: foundMovieJSON.Genre,
+				rated: foundMovieJSON.Rated,
+				actors: foundMovieJSON.Actors,
+				runTime: foundMovieJSON.Runtime,
+				country: foundMovieJSON.Country,
+				imdbRating: foundMovieJSON.imdbRating
+			}, {new: true});
 
-		JSON.stringify(foundMovieJSON);
+		await updatedMovie.save();
+		JSON.stringify(updatedMovie);
 		res.json({
 			status: 200,
-			data: foundMovieJSON
+			data: updatedMovie
 		})
 	} catch (err) {
 		// res.send(err)
