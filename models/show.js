@@ -11,7 +11,10 @@ const showSchema = new mongoose.Schema({
 	episodes: Number,
 	adds: Number,
 	recommendations: Number,
-	imageUrl: String
+	imageUrl: String,
+	actors: String,
+	imdbRating: Number,
+	country: String
 })
 
 module.exports = mongoose.model('Show', showSchema);

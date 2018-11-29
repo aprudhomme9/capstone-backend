@@ -55,5 +55,19 @@ router.delete('/:id', async (req, res) => {
 	}
 })
 
+// put route to edit user's shows and movies
+router.put('/:id', async (req, res) => {
+	try {
+		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+		res.json({
+			status: 200,
+			data: updatedUser,
+			message: 'user updated successfully'
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
 
 module.exports = router;

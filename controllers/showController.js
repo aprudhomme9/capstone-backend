@@ -67,12 +67,13 @@ router.get('/show/:id', async (req, res) => {
 		const foundShowJSON = await JSON.parse(foundShow.text);
 		// Updates selected Show with additional info from API
 		// Show selected using imdbID, as is required by omdb API
+		console.log(foundShowJSON, '<---FOUND SHOW');
 		const updatedShow = await Show.findOneAndUpdate({title: foundShowJSON.Title}, {
 				description: foundShowJSON.Plot,
 				genre: foundShowJSON.Genre,
 				rated: foundShowJSON.Rated,
 				actors: foundShowJSON.Actors,
-				runTime: foundShowJSON.Runtime,
+				seasons: foundShowJSON.totalSeasons,
 				country: foundShowJSON.Country,
 				imdbRating: foundShowJSON.imdbRating
 			}, {new: true});
@@ -88,7 +89,8 @@ router.get('/show/:id', async (req, res) => {
 	}
 })
 
-// PUT request to eddddiiitt
+// PUT request to edit
+// Specifically for adjusting favorites, recommendations, adds
 
 
 module.exports = router;
