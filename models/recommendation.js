@@ -9,7 +9,8 @@ const recommendationSchema = new mongoose.Schema({
 	recipient: User.schema,
 	body: {type: String, required: false},
 	movie: Movie.schema,
-	show: Show.schema
+	show: Show.schema,
+	read: Boolean 
 })
 
 
