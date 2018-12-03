@@ -25,8 +25,10 @@ router.get('/', async (req, res) => {
 // get route to show page for groups
 router.get('/:id', async (req, res) => {
 	try {
+		console.log('ROUTE HITTING');
 		const foundGroup = await Group.findById(req.params.id);
-
+		console.log(foundGroup, 'HERES TEH GROUP');
+		JSON.stringify(foundGroup);
 		res.json({
 			status: 200,
 			data: foundGroup,

@@ -105,7 +105,7 @@ router.get('/show/add/:id', async (req, res) => {
 
 router.get('/view/popular', async (req, res) => {
 	try {
-		const popularShows = await Show.find({'favorites': {$gt: 1}});
+		const popularShows = await Show.find({}).sort({'favorites': -1}).limit(5);
 		JSON.stringify(popularShows);
 		res.json({
 			status: 200,

@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 })
 router.get('/view/popular', async (req, res) => {
 	try {
-		const popularMovies = await Movie.find({'favorites': {$gt: 3}});
+		const popularMovies = await Movie.find({}).sort({'favorites': -1}).limit(5);
 		JSON.stringify(popularMovies);
 		res.json({
 			status: 200,
