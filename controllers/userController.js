@@ -5,11 +5,12 @@ const User = require('../models/user');
 // GET route to fetch all users
 router.get('/', async (req, res) => {
 	try {
-		const allUsers = await User.find({});
-
+		const activeUser = await User.findById(req.session.ID);
+		console.log(req.session, '<--------SESSSSSSIIIOONNN');
+		console.log('finding the ussseeerrrr----------', activeUser);
 		res.json({
 			status: 200,
-			data: allUsers,
+			data: activeUser,
 			message: 'success'
 		})
 	} catch (err) {
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.params.id);
-
+		console.log('THIS ROUTE IS HITTING', foundUser);
 		res.json({
 			status: 200,
 			data: foundUser,
@@ -59,6 +60,11 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try {
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+		console.log('UPDATING THE USER');
+		console.log('request body---->', req.body);
+		console.log(updatedUser, 'UPDATED USER???????');
+
+		await updatedUser.save();
 
 		res.json({
 			status: 200,

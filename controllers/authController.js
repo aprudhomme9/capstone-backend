@@ -8,6 +8,8 @@ const User = require('../models/user');
 router.get('/', async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.session.ID);
+		console.log('this route is hitting');
+		console.log(foundUser, '<----ACTIVE USSSEERRRR');
 		if(foundUser){
 			res.json({
 				status: 200,

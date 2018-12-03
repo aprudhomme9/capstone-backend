@@ -43,13 +43,13 @@ router.get('/:search', async (req, res) => {
 				return movie
 			}
 		})
-			
+		console.log(moviesToCreate);
 		const createdMovies = await Movie.create(moviesToCreate);
-				
+		console.log(createdMovies);	
 		JSON.stringify(createdMovies);
 		res.json({
 			status: 200,
-			data: createdMovies
+			data: mappedMovies
 		})
 	} catch (err) {
 		// res.send(err)
@@ -70,7 +70,8 @@ router.get('/movie/:id', async (req, res) => {
 				actors: foundMovieJSON.Actors,
 				runTime: foundMovieJSON.Runtime,
 				country: foundMovieJSON.Country,
-				imdbRating: foundMovieJSON.imdbRating
+				imdbRating: foundMovieJSON.imdbRating,
+				imdbID: foundMovieJSON.imdbID
 			}, {new: true});
 
 		await updatedMovie.save();
@@ -78,6 +79,19 @@ router.get('/movie/:id', async (req, res) => {
 		res.json({
 			status: 200,
 			data: updatedMovie
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+router.get('/movie/add/:id', async (req, res) => {
+	try {
+		const foundMovie = await Movie.findById(req.params.id);
+
+		JSON.stringify(foundMovie);
+		res.json({
+			status: 200,
+			data: foundMovie
 		})
 	} catch (err) {
 		// res.send(err)

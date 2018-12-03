@@ -7,9 +7,21 @@ const Group = require('../models/group');
 const express = require('express');
 const router = express.Router();
 
+// get all comments
+router.get('/', async (req, res) => {
+	try {
+		const foundComments = await Comment.find({});
 
+		res.json({
+			status: 200,
+			data: foundComments
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
 // get route for all comments in group discussion
-router.get('/:groupId', async (req, res) => {
+router.get('/group/:groupId', async (req, res) => {
 	try {
 		const groupComments = await Comment.findMany({group: req.params.groupId})
 

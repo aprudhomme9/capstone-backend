@@ -53,7 +53,7 @@ router.get('/:search', async (req, res) => {
 		JSON.stringify(createdShows);
 		res.json({
 			status: 200,
-			data: createdShows
+			data: mappedShows
 		})
 	} catch (err) {
 		// res.send(err)
