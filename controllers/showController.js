@@ -103,6 +103,19 @@ router.get('/show/add/:id', async (req, res) => {
 	}
 })
 
+router.get('/view/popular', async (req, res) => {
+	try {
+		const popularShows = await Show.find({'favorites': {$gt: 1}});
+		JSON.stringify(popularShows);
+		res.json({
+			status: 200,
+			data: popularShows
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+
 router.put('/show/:id', async (req, res) => {
 	try {
 		const updatedShow = await Show.findByIdAndUpdate(req.params.id, req.body, {new: true});

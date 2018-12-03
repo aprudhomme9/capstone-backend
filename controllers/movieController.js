@@ -23,6 +23,18 @@ router.get('/', async (req, res) => {
 		// res.send(err)
 	}
 })
+router.get('/view/popular', async (req, res) => {
+	try {
+		const popularMovies = await Movie.find({'favorites': {$gt: 3}});
+		JSON.stringify(popularMovies);
+		res.json({
+			status: 200,
+			data: popularMovies
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
 // get request when user searches
 router.get('/:search', async (req, res) => {
 	try {
