@@ -2,7 +2,21 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
+
+
 // GET route to fetch all users
+router.get('/all', async (req, res) => {
+	try {
+		const allUsers = await User.find({});
+		res.json({
+			status: 200,
+			data: allUsers
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+// GET route to fetch active user
 router.get('/', async (req, res) => {
 	try {
 		const activeUser = await User.findById(req.session.ID);

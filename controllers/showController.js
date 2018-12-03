@@ -89,6 +89,34 @@ router.get('/show/:id', async (req, res) => {
 	}
 })
 
+router.get('/show/add/:id', async (req, res) => {
+	try {
+		const foundShow = await Show.findById(req.params.id);
+
+		JSON.stringify(foundShow);
+		res.json({
+			status: 200,
+			data: foundShow
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+
+router.put('/show/:id', async (req, res) => {
+	try {
+		const updatedShow = await Show.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+		JSON.stringify(updatedShow);
+		res.json({
+			status: 200,
+			data: updatedShow
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+
 // PUT request to edit
 // Specifically for adjusting favorites, recommendations, adds
 

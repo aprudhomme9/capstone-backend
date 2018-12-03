@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
 	favoriteMovies: [Movie.schema],
 	favoriteShows: [Show.schema],
 	watchListMovies: [Movie.schema],
-	watchListShows: [Show.schema]
+	watchListShows: [Show.schema],
+	bio: String
 	// groups: [Group.schema] //not sure if necessary
 })
 

@@ -9,7 +9,20 @@ const addKey = '&apikey=ec5b4bc1';
 const typeMovie = '&type=movie';
 const Movie = require('../models/movie');
 
+// get all movies
+router.get('/', async (req, res) => {
+	try {
+		const allMovies = await Movie.find({});
 
+		JSON.stringify(allMovies);
+		res.json({
+			status: 200,
+			data: allMovies
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
 // get request when user searches
 router.get('/:search', async (req, res) => {
 	try {
@@ -25,7 +38,10 @@ router.get('/:search', async (req, res) => {
 				title: movie.Title,
 				imageUrl: movie.Poster,
 				year: movie.Year,
-				imdbID: movie.imdbID
+				imdbID: movie.imdbID,
+				favorites: 0,
+				adds: 0,
+				recommendations: 0
 			}
 			return newObject;
 		})
@@ -72,6 +88,7 @@ router.get('/movie/:id', async (req, res) => {
 				country: foundMovieJSON.Country,
 				imdbRating: foundMovieJSON.imdbRating,
 				imdbID: foundMovieJSON.imdbID
+
 			}, {new: true});
 
 		await updatedMovie.save();
@@ -92,6 +109,20 @@ router.get('/movie/add/:id', async (req, res) => {
 		res.json({
 			status: 200,
 			data: foundMovie
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+
+router.put('/movie/:id', async (req, res) => {
+	try {
+		const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+		JSON.stringify(updatedMovie);
+		res.json({
+			status: 200,
+			data: updatedMovie
 		})
 	} catch (err) {
 		// res.send(err)
