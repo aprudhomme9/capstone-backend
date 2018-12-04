@@ -7,6 +7,8 @@ const Group = require('../models/group');
 const express = require('express');
 const router = express.Router();
 
+
+
 // get all comments
 router.get('/', async (req, res) => {
 	try {
@@ -48,13 +50,18 @@ router.get('/:id', async (req, res) => {
 	}
 })
 // POST route to create comment
-router.post('/:groupId', async (req, res) => {
+router.post('/', async (req, res) => {
+	const today = new Date();
+	const timeStamp = today.toLocaleDateString('en-US').toString() + " " + today.toLocaleTimeString('en-US');
 	try {
 		const commentEntry = {};
 		commentEntry.body = req.body.body;
-		const foundUser = await User.findOne({username: req.body.author});
-		commentEntry.author = foundUser;
+		commentEntry.author = req.body.author;
+		commentEntry.timeStamp = timeStamp;
+		commentEntry.likes = 0;
 		const commentToCreate = await Comment.create(commentEntry);
+		JSON.stringify(commentToCreate);
+		console.log(commentToCreate, 'HEREHEHREHRHERHEH');
 
 		res.json({
 			status: 200,
@@ -69,8 +76,11 @@ router.post('/:groupId', async (req, res) => {
 // PUT route to edit comment
 router.put('/:id', async (req, res) => {
 	try {
+		console.log('HITTING');
+		console.log(req.body, '<--BODY');
+		console.log(req.params.id, '<---ID');
 		const editedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, {new: true});
-
+		console.log(editedComment, '<--EDITED COMMENT');
 		res.json({
 			status: 200,
 			data: editedComment,

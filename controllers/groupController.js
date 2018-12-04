@@ -70,4 +70,17 @@ router.put('/:id', async (req, res) => {
 	}
 })
 
+router.delete('/all', async (req, res) => {
+	try {
+		const deletedGroups = await Group.deleteMany({});
+
+		res.json({
+			status: 200,
+			message: 'group are gone'
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+
 module.exports = router
