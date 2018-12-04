@@ -58,6 +58,8 @@ router.post('/', async (req, res) => {
 // specifically members joining and leaving
 router.put('/:id', async (req, res) => {
 	try {
+		console.log("ROUTE IS HITTTTTING");
+		console.log(req.body, '<----HERE IS THE BODY');
 		const editedGroup = await Group.findByIdAndUpdate(req.params.id, req.body, {new: true});
 		editedGroup.save();
 		res.json({

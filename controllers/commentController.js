@@ -61,7 +61,6 @@ router.post('/', async (req, res) => {
 		commentEntry.likes = 0;
 		const commentToCreate = await Comment.create(commentEntry);
 		JSON.stringify(commentToCreate);
-		console.log(commentToCreate, 'HEREHEHREHRHERHEH');
 
 		res.json({
 			status: 200,
