@@ -13,7 +13,8 @@ const movieSchema = new mongoose.Schema({
 	rated: String,
 	actors: String,
 	runTime: String,
-	imdbRating: Number
+	imdbRating: Number,
+	totalScore: Number
 })
 
 module.exports = mongoose.model('Movie', movieSchema);

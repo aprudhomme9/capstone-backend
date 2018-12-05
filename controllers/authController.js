@@ -99,7 +99,10 @@ router.post('/register', async (req, res) => {
     	data: user
     })
     } catch(err){
-        console.log(err)
+        res.json({
+        	status: 400,
+        	message: 'Incorrect'
+        })
     }
 		    	
 

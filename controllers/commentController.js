@@ -78,7 +78,9 @@ router.put('/:id', async (req, res) => {
 		console.log('HITTING');
 		console.log(req.body, '<--BODY');
 		console.log(req.params.id, '<---ID');
-		const editedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, {new: true});
+		const commentToEdit = await Comment.findById(req.params.id);
+
+		const editedComment = await Comment.findByIdAndUpdate(req.params.id, {'likes': commentToEdit.likes + 1}, {new: true});
 		console.log(editedComment, '<--EDITED COMMENT');
 		res.json({
 			status: 200,

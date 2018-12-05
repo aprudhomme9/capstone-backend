@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 const Movie = require('./movie');
 const Show = require('./show');
+const Recommendation = require('./recommendation');
 
 const userSchema = new mongoose.Schema({
-	username: {type: String},
+	username: {type: String, unique: true},
 	password: {type: String},
 	favoriteMovies: [Movie.schema],
 	favoriteShows: [Show.schema],
 	watchListMovies: [Movie.schema],
 	watchListShows: [Show.schema],
-	bio: String
+	bio: String,
+	recommendations: [Recommendation.schema]
 	// groups: [Group.schema] //not sure if necessary
 })
 

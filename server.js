@@ -41,7 +41,7 @@ const movieController = require('./controllers/movieController')
 const showController = require('./controllers/showController')
 const groupController = require('./controllers/groupController')
 const commentController = require('./controllers/commentController')
-const recommendationController = require('./controllers/recommendationController')
+const recController = require('./controllers/recController')
 const authController = require('./controllers/authController')
 
 app.use('/api/users', userController);
@@ -49,7 +49,7 @@ app.use('/api/movies', movieController);
 app.use('/api/shows', showController);
 app.use('/api/groups', groupController);
 app.use('/api/comments', commentController);
-// app.use('/api/recommendations', recommendationController);
+app.use('/api/recs', recController);
 app.use('/auth', authController);
 
 app.listen(PORT, () => {

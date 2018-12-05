@@ -25,7 +25,9 @@ router.get('/:search', async (req, res) => {
 				title: show.Title,
 				imageUrl: show.Poster,
 				year: show.Year,
-				imdbID: show.imdbID
+				imdbID: show.imdbID,
+				favorites: 0,
+				adds: 0
 			}
 			return newObject;
 		})

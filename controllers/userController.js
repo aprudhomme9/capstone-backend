@@ -20,8 +20,7 @@ router.get('/all', async (req, res) => {
 router.get('/', async (req, res) => {
 	try {
 		const activeUser = await User.findById(req.session.ID);
-		console.log(req.session, '<--------SESSSSSSIIIOONNN');
-		console.log('finding the ussseeerrrr----------', activeUser);
+
 		res.json({
 			status: 200,
 			data: activeUser,
@@ -34,9 +33,10 @@ router.get('/', async (req, res) => {
 
 // GET route to find single user by ID
 router.get('/:id', async (req, res) => {
+	console.log('GET ROUTE TO FIND USER BY ID');
 	try {
 		const foundUser = await User.findById(req.params.id);
-		console.log('THIS ROUTE IS HITTING', foundUser);
+
 		res.json({
 			status: 200,
 			data: foundUser,
@@ -74,9 +74,9 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try {
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
-		console.log('UPDATING THE USER');
+
 		console.log('request body---->', req.body);
-		console.log(updatedUser, 'UPDATED USER???????');
+
 
 		await updatedUser.save();
 

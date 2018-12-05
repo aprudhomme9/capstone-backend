@@ -5,9 +5,7 @@ const Show = require('./show');
 
 
 const recommendationSchema = new mongoose.Schema({
-	author: User.schema,
-	recipient: User.schema,
-	body: {type: String, required: false},
+	author: String,
 	movie: Movie.schema,
 	show: Show.schema,
 	read: Boolean 
