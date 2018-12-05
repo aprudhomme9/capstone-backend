@@ -43,13 +43,14 @@ const groupController = require('./controllers/groupController')
 const commentController = require('./controllers/commentController')
 const recController = require('./controllers/recController')
 const authController = require('./controllers/authController')
-
+const showRecController = require('./controllers/showRecController')
 app.use('/api/users', userController);
 app.use('/api/movies', movieController);
 app.use('/api/shows', showController);
 app.use('/api/groups', groupController);
 app.use('/api/comments', commentController);
 app.use('/api/recs', recController);
+app.use('/api/showrecs', showRecController);
 app.use('/auth', authController);
 
 app.listen(PORT, () => {

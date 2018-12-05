@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
 	watchListMovies: [Movie.schema],
 	watchListShows: [Show.schema],
 	bio: String,
-	recommendations: [Recommendation.schema]
+	recommendations: [Recommendation.schema],
+	showRecommendations: [Recommendation.schema]
 	// groups: [Group.schema] //not sure if necessary
 })
 
