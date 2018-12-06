@@ -10,7 +10,7 @@ const Comment = require('./models/comment')
 const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
-const originRoute = 'https://watch-with-friends-react.herokuapp.com/'|| 'http://localhost:3000';
+const originRoute = 'https://watch-with-friends-react.herokuapp.com/' || 'http://localhost:3000';
 const PORT = process.env.PORT || 5000;
 require('dotenv').config();
 
