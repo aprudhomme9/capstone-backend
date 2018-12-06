@@ -11,8 +11,8 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 const originRoute = process.env.CLIENT_URL || 'http://localhost:3000';
+console.log(process.env.CLIENT);
 const PORT = process.env.PORT || 5000;
-require('dotenv').config();
 
 
 require('./db/db')
