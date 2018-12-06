@@ -19,19 +19,6 @@ const corsOptions = {
 	credentials: true,
 	optionsSuccessStatus: 200
 }
-app.use(cors(corsOptions));
-
-require('./db/db')
-app.use(session({
-	secret: 'paddington bear 2',
-	resave: false,
-	saveUninitialized: false
-}))
-
-//MIDDLEWARE
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -50,6 +37,20 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+app.use(cors(corsOptions));
+
+require('./db/db')
+app.use(session({
+	secret: 'paddington bear 2',
+	resave: false,
+	saveUninitialized: false
+}))
+
+//MIDDLEWARE
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+
 
 
 
