@@ -11,9 +11,15 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 const originRoute = process.env.CLIENT_URL || 'http://localhost:3000';
-console.log(process.env.CLIENT);
+
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+	origin: originRoute,
+	credentials: true,
+	optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 require('./db/db')
 app.use(session({
@@ -26,12 +32,6 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-const corsOptions = {
-	origin: originRoute,
-	credentials: true,
-	optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));
 
 
 // Controllers
