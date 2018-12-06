@@ -15,7 +15,7 @@ const originRoute = process.env.CLIENT_URL || 'http://localhost:3000';
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-	origin: originRoute,
+	origin: process.env.CLIENT_URL,
 	credentials: true,
 	optionsSuccessStatus: 200
 }
