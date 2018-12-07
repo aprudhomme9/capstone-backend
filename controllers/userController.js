@@ -70,6 +70,19 @@ router.delete('/:id', async (req, res) => {
 	}
 })
 
+router.delete('/', async (req, res) => {
+	try {
+		const allUsers = await User.deleteMany({});
+
+		res.json({
+			status: 200,
+			message: 'deleted all of them'
+		})
+	} catch (err) {
+		// res.send(err)
+	}
+})
+
 // put route to edit user's shows and movies
 router.put('/:id', async (req, res) => {
 	try {

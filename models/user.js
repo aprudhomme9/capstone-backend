@@ -4,7 +4,7 @@ const Show = require('./show');
 const Recommendation = require('./recommendation');
 
 const userSchema = new mongoose.Schema({
-	username: {type: String, unique: true},
+	username: {type: String},
 	password: {type: String},
 	favoriteMovies: [Movie.schema],
 	favoriteShows: [Show.schema],

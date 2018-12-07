@@ -14,30 +14,7 @@ const originRoute = process.env.CLIENT_URL || 'http://localhost:3000';
 
 const PORT = process.env.PORT || 5000;
 
-const corsOptions = {
-	origin: process.env.CLIENT_URL,
-	credentials: true,
-	optionsSuccessStatus: 200
-}
-app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://watch-with-friends-express.herokuapp.com');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', true);
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
-app.use(cors(corsOptions));
 
 require('./db/db')
 app.use(session({
@@ -45,6 +22,14 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false
 }))
+
+const corsOptions = {
+    origin: originRoute,
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 //MIDDLEWARE
 app.use(bodyParser.urlencoded({extended: false}))
@@ -59,11 +44,12 @@ app.use(bodyParser.json())
 const userController = require('./controllers/userController')
 const movieController = require('./controllers/movieController')
 const showController = require('./controllers/showController')
-const groupController = require('./controllers/groupController')
+const groupController = require('./controllers/watchGroupController')
 const commentController = require('./controllers/commentController')
 const recController = require('./controllers/recController')
 const authController = require('./controllers/authController')
 const showRecController = require('./controllers/showRecController')
+
 app.use('/api/users', userController);
 app.use('/api/movies', movieController);
 app.use('/api/shows', showController);

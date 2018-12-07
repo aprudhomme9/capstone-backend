@@ -5,12 +5,12 @@ const User = require('./user');
 const Comment = require('./comment');
 
 
-const groupSchema = new mongoose.Schema({
-	groupName: String,
+const watchGroupSchema = new mongoose.Schema({
+	name: {type: String, required: true},
 	popularMovies: [Movie.schema],
 	popularShows: [Show.schema],
 	members: [User.schema],
 	discussion: [Comment.schema]
 })
 
-module.exports = mongoose.model('Group', groupSchema);
+module.exports = mongoose.model('WatchGroup', watchGroupSchema);
