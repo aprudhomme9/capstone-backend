@@ -11,10 +11,11 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 
-const originRoute = process.env.CLIENT_URL || 'http://localhost:3000';
-console.log(process.env.CLIENT_URL, '<--ORIGIN ROUTE');
-const PORT = process.env.PORT || 5000;
-console.log(process.env.PORT, '<----PORT');
+const originRoute = "https://watch-with-friends-react.herokuapp.com"
+ || 'http://localhost:3000';
+
+const PORT = 'https://watch-with-friends-express.herokuapp.com/' || 5000;
+console.log(process.env, '<----process.env');
 
 
 
@@ -26,7 +27,7 @@ app.use(session({
 }))
 
 const corsOptions = {
-    origin: originRoute,
+    origin: 'https://watch-with-friends-react.herokuapp.com',
     credentials: true,
     optionsSuccessStatus: 200
 }
