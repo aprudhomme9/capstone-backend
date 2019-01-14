@@ -32,7 +32,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 console.log(cors, "<---CORS");
-// app.use(cors(corsOptions));
+app.use(cors());
 
 //MIDDLEWARE
 app.use(bodyParser.urlencoded({extended: false}))
