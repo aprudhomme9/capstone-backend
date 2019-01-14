@@ -11,14 +11,14 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 
-const originRoute = "https://watch-with-friends-react.herokuapp.com"
- || 'http://localhost:3000';
+const originRoute = 'http://localhost:3000' ||"https://watch-with-friends-react.herokuapp.com"
+ ;
 
-const PORT = 'https://watch-with-friends-express.herokuapp.com/' || 5000;
+const PORT = 5000 || 'https://watch-with-friends-express.herokuapp.com/';
 console.log(process.env, '<----process.env');
 
 
-
+console.log(originRoute, '<---OG ROUTE');
 require('./db/db')
 app.use(session({
 	secret: 'paddington bear 2',
@@ -27,11 +27,11 @@ app.use(session({
 }))
 
 const corsOptions = {
-    origin: 'https://watch-with-friends-react.herokuapp.com',
+    origin: true,
     credentials: true,
     optionsSuccessStatus: 200
 }
-
+console.log(cors, "<---CORS");
 app.use(cors(corsOptions));
 
 //MIDDLEWARE
