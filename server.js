@@ -11,7 +11,7 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 
-const originRoute = 'http://localhost:3000/' ||"https://watch-with-friends-react.herokuapp.com"
+const originRoute = 'http://localhost:3000/' ||' https://watch-with-friends-react.herokuapp.com'
  ;
 // const originRoute = 'http://locahost:3000';
 
@@ -28,7 +28,7 @@ app.use(session({
 }))
 
 const corsOptions = {
-    Acess-Control-Allow-Origin: originRoute,
+    origin: originRoute,
     credentials: true,
     optionsSuccessStatus: 200,
     mode: 'no-cors'
