@@ -28,7 +28,7 @@ app.use(session({
 }))
 
 const corsOptions = {
-    origin: originRoute,
+    Acess-Control-Allow-Origin: originRoute,
     credentials: true,
     optionsSuccessStatus: 200,
     mode: 'no-cors'
