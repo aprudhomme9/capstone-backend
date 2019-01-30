@@ -24,7 +24,7 @@ require('./db/db')
 
 var whitelist = ['http://locahost:3000', originRoute]
 const corsOptions = {
-  origin: whitelist,
+  origin: false,
   methods: ["GET","PUT","PATCH","POST","DELETE"],
   preflightContinue: false,
   optionsSuccessStatus: 204,
