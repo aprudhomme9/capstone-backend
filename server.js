@@ -24,16 +24,11 @@ require('./db/db')
 
 var whitelist = ['http://locahost:3000', originRoute]
 var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+  origin: originRoute
   }
-}
+
 console.log(corsOptions, '<----cors options');
-console.log(cors() );
+console.log(cors(corsOptions));
 // console.log(cors, "<---CORS");
 app.use(cors(corsOptions));
 // app.get('/products/:id', function (req, res, next) {
