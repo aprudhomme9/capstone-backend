@@ -11,9 +11,9 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 
-// const originRoute = 'http://localhost:3000/' ||"https://watch-with-friends-react.herokuapp.com"
-//  ;
-const originRoute = 'http://locahost:3000';
+const originRoute = 'http://localhost:3000/' ||"https://watch-with-friends-react.herokuapp.com"
+ ;
+// const originRoute = 'http://locahost:3000';
 
 const PORT = 5000 || 'https://watch-with-friends-express.herokuapp.com/';
 console.log(process.env, '<----process.env');
