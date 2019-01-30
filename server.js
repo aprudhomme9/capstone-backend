@@ -23,9 +23,12 @@ console.log(originRoute, '<---OG ROUTE');
 require('./db/db')
 
 var whitelist = ['http://locahost:3000', originRoute]
-var corsOptions = {
-  origin: originRoute
-  }
+const corsOptions = {
+  origin: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}
 
 console.log(corsOptions, '<----cors options');
 console.log(cors(corsOptions));
