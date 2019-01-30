@@ -33,7 +33,7 @@ const corsOptions = {
 console.log(corsOptions, '<----cors options');
 console.log(cors(corsOptions));
 // console.log(cors, "<---CORS");
-app.use(cors(corsOptions));
+
 // app.get('/products/:id', function (req, res, next) {
 //   res.json({msg: 'This is CORS-enabled for all origins!'})
 // })
@@ -73,6 +73,8 @@ app.use('/api/comments', commentController);
 app.use('/api/recs', recController);
 app.use('/api/showrecs', showRecController);
 app.use('/auth', authController);
+
+app.use(cors(corsOptions));
 
 app.listen(PORT, () => {
 	console.log('listening on port ' + PORT)
