@@ -35,7 +35,7 @@ const corsOptions = {
 }
 console.log(corsOptions, '<----cors options');
 // console.log(cors, "<---CORS");
-app.use(cors());
+app.use(cors(corsOptions));
 
 //MIDDLEWARE
 app.use(bodyParser.urlencoded({extended: false}))
