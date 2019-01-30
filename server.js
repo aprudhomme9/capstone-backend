@@ -22,19 +22,22 @@ console.log(process.env, '<----process.env');
 console.log(originRoute, '<---OG ROUTE');
 require('./db/db')
 
-
-const corsOptions = {
-    origin: originRoute,
-    credentials: true,
-    optionsSuccessStatus: 200,
-    mode: 'no-cors'
+var whitelist = ['http://locahost:3000', originRoute]
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
 console.log(corsOptions, '<----cors options');
 // console.log(cors, "<---CORS");
 app.use(cors());
-app.get('/products/:id', function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})
+// app.get('/products/:id', function (req, res, next) {
+//   res.json({msg: 'This is CORS-enabled for all origins!'})
+// })
 
 
 
