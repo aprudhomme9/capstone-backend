@@ -30,7 +30,8 @@ app.use(session({
 const corsOptions = {
     origin: originRoute,
     credentials: true,
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    mode: 'no-cors'
 }
 console.log(corsOptions, '<----cors options');
 // console.log(cors, "<---CORS");
