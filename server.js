@@ -24,20 +24,11 @@ require('./db/db')
 
 var whitelist = ['http://locahost:3000', originRoute]
 const corsOptions = {
-  origin: true,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  origin: whitelist,
+  methods: ["GET","PUT","PATCH","POST","DELETE"],
   preflightContinue: false,
   optionsSuccessStatus: 204
 }
-
-console.log(corsOptions, '<----cors options');
-console.log(cors(corsOptions));
-// console.log(cors, "<---CORS");
-
-// app.get('/products/:id', function (req, res, next) {
-//   res.json({msg: 'This is CORS-enabled for all origins!'})
-// })
-
 
 
 app.use(session({
