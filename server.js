@@ -11,7 +11,7 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 
-const originRoute = 'http://localhost:3000/' ||' https://watch-with-friends-react.herokuapp.com'
+const originRoute ='https://watch-with-friends-react.herokuapp.com'
  ;
 // const originRoute = 'http://locahost:3000';
 
@@ -21,11 +21,7 @@ console.log(process.env, '<----process.env');
 
 console.log(originRoute, '<---OG ROUTE');
 require('./db/db')
-app.use(session({
-	secret: 'paddington bear 2',
-	resave: false,
-	saveUninitialized: false
-}))
+
 
 const corsOptions = {
     origin: originRoute,
@@ -35,7 +31,18 @@ const corsOptions = {
 }
 console.log(corsOptions, '<----cors options');
 // console.log(cors, "<---CORS");
-app.use(cors(corsOptions));
+app.use(cors());
+app.get('/products/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+})
+
+
+
+app.use(session({
+	secret: 'paddington bear 2',
+	resave: false,
+	saveUninitialized: false
+}))
 
 //MIDDLEWARE
 app.use(bodyParser.urlencoded({extended: false}))
