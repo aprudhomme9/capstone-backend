@@ -11,9 +11,9 @@ const Recommendation = require('./models/recommendation')
 const session = require('express-session')
 
 
-const originRoute ='https://watch-with-friends-react.herokuapp.com'
- ;
-// const originRoute = 'http://locahost:3000';
+// const originRoute ='https://watch-with-friends-react.herokuapp.com'
+ // ;
+const originRoute = 'https://watch-with-friends-react.herokuapp.com' || 'http://locahost:3000';
 
 const PORT = 5000 || process.env.PORT;
 console.log(process.env, '<----process.env');
@@ -25,7 +25,7 @@ require('./db/db')
 var whitelist = ['http://locahost:3000', originRoute]
 
 const corsOptions = {
-    origin: whitelist,
+    origin: 'http://localhost:3000',
     credentials: true,
     optionsSuccessStatus: 200
 }

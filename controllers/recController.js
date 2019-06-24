@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
 const Show = require('../models/show');
 const Movie = require('../models/movie');
 const Rec = require('../models/rec');
